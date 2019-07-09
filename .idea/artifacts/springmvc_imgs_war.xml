@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="springmvc_imgs:war">
+    <output-path>$PROJECT_DIR$/../springmvc_student/springmvc_imgs/target</output-path>
+    <root id="archive" name="springmvc_imgs.war">
+      <element id="artifact" artifact-name="springmvc_imgs:war exploded" />
+    </root>
+  </artifact>
+</component>

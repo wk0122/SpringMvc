@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--配置HelloWorld-->
+    <bean name="/hello.action" id="helloWorld" class="tech.aistar.controller.Hello"></bean>
+
+    <!--配置采用何种处理器映射器和何种处理器适配器-->
+
+    <!--处理器映射器
+        BeanNameUrlHandlerMapping - 映射的规则就是根据小c的bean的name属性的值作为资源路径
+    -->
+    <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>-->
+
+    <!--处理器适配器
+        底层是大C调用该处理器适配器的时候,适配器会将处理器映射器找到的那个小c传到自己的supports方法中
+        如果小c属于Controller类型,那么才可以被适配器去执行,否则返回false,不能够被执行,所以如果选择的是
+        SimpleControllerHandlerAdapter,那么我们的小c一定要去实现Controller接口
+    -->
+    <!--<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>-->
+
+    <!---视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--配置逻辑视图的前缀-->
+        <property name="prefix" value="WEB-INF/"></property>
+        <!--配置后缀-->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!--springmvc执行流程:-->
+    <!--1. 客户端 - http://localhost:8081/springmvc_teach_day01/hello.action-->
+    <!--2. 根据web.xml中的后缀匹配*.action - DispatcherServlet[大C]-->
+    <!--3. 由于大C加载了springmvc.xml文件 - 配置了BeanNameUrlHandlerMapping处理器映射器 - 映射的规则-->
+       <!-- - 寻找某个bean的name的值 = /hello.action - 返回一个执行链给大C-->
+    <!--4. 大C调用配置的SimpleControllerHandlerAdapter - 执行的规则 - 小c必须要实现了Controller接口-->
+       <!--执行完毕之后返回ModelAndView对象给大C-->
+    <!---->
+    <!--5. 大C调用视图解析器[如果没有配置,默认采取jsp的视图解析] - 逻辑视图名导航到真正的jsp视图-->
+       <!--返回一个view给大C-->
+    <!---->
+    <!--6. 大C将作用域中的数据渲染到真在view - 由大C响应给客户端-->
+
+    <!--如果三器都没有进行配置,依然访问成功,说明默认配置了三器-->
+</beans>

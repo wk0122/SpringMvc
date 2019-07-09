@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!--引入外部的属性文件-->
+    <context:property-placeholder location="classpath:config/dbConfig.properties"></context:property-placeholder>
+    <!--配置数据源 - druid连接池-->
+    <!--配置阿里的druid连接池[数据源]-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!--属性注入 - 底层采用反射-->
+        <property name="username" value="${mysql_user}"></property>
+        <property name="password" value="${mysql_pwd}"></property>
+        <property name="url" value="${mysql_url}"></property>
+        <property name="driverClassName" value="${mysql_driver}"></property>
+    </bean>
+
+    <!--配置SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--将一些mybatis其他的设置放入到mybatis-config.xml文件中-->
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+
+        <!--配置属性值-->
+        <property name="dataSource" ref="dataSource"></property>
+
+
+        <!--可以完全舍弃mybatis-config.xml文件-->
+        <!--<property name="typeAliasesPackage" value="tech.aistar"></property>-->
+
+        <!--<property name="mapperLocations">-->
+        <!--<value>classpath*:mapper/**/*.xml</value>-->
+        <!--</property>-->
+    </bean>
+
+    <!--注册mapper - 由ioc容器来创建mapper的代理对象-->
+
+    <!-- Mapper的批量扫描,从mpper包中扫描mapper接口,自动创建代理对象并且在spring容器中注入
+         自动扫描出来的mapper的bean的id为mapper类名[首字母小写]
+     -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 指定扫描的包名
+            如果扫描多个包,使用半角逗号隔开.
+        -->
+        <property name="basePackage" value="tech.aistar.mapper"></property>
+        <!--获取Mapper代理对象是通过sqlSession-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+    <!--要想使用spring的事务的核心API,必须要引入spring的事务管理器
+        DataSourceTransactionManager - 对应的就是JDBC的事务
+    -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--事务的注解的配置方式 - 启用事务的注解的配置-->
+
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+    <!--<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>-->
+</beans>

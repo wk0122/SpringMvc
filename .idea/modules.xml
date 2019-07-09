@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../springmvc_student/knowledgeable/knowledgeable.iml" filepath="$PROJECT_DIR$/../springmvc_student/knowledgeable/knowledgeable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../springmvc_student/springmvc_imgs/springmvc_imgs.iml" filepath="$PROJECT_DIR$/../springmvc_student/springmvc_imgs/springmvc_imgs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../springmvc_student/springmvc_student.iml" filepath="$PROJECT_DIR$/../springmvc_student/springmvc_student.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../springmvc_student/springmvc_student_day01/springmvc_student_day01.iml" filepath="$PROJECT_DIR$/../springmvc_student/springmvc_student_day01/springmvc_student_day01.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd
+         http://www.springframework.org/schema/context
+         https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--使用下面的这个配置代替上面的俩种配置方式-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+    <!--启用组件扫描的注解配置方式
+        控制层扫包一定要扫到具体的包
+     -->
+    <context:component-scan base-package="tech.aistar.controller"></context:component-scan>
+
+    <!---视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--配置逻辑视图的前缀-->
+        <property name="prefix" value="/WEB-INF/"></property>
+        <!--配置后缀-->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!--增加对静态资源文件的解析-->
+    <mvc:resources location="/plugins/" mapping="/plugins/**"></mvc:resources>
+    <mvc:resources location="/imgs/" mapping="/imgs/**"></mvc:resources>
+    <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="524280000"></property>
+    </bean>
+
+
+    <bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
+    </bean>
+</beans>

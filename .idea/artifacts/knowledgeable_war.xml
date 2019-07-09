@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="knowledgeable:war">
+    <output-path>$PROJECT_DIR$/../springmvc_student/knowledgeable/target</output-path>
+    <root id="archive" name="knowledgeable.war">
+      <element id="artifact" artifact-name="knowledgeable:war exploded" />
+    </root>
+  </artifact>
+</component>

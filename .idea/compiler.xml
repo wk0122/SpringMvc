@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="knowledgeable" />
+        <module name="springmvc_imgs" />
+        <module name="springmvc_student_day01" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="knowledge" target="1.7" />
+      <module name="knowledgeable" target="1.8" />
+      <module name="qq" target="1.7" />
+      <module name="springmvc_imgs" target="1.8" />
+      <module name="springmvc_student" target="1.8" />
+      <module name="springmvc_student_day01" target="1.8" />
+      <module name="ss" target="1.7" />
+      <module name="ww" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
